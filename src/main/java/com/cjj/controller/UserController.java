@@ -1,8 +1,12 @@
 package com.cjj.controller;
 
+import com.cjj.domain.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 //@RequestMapping("/test")
@@ -22,11 +29,73 @@ public class UserController {
         System.out.println("Controller save running!");
         return "success";
     }
+
+    @RequestMapping("/quick12")
+    @ResponseBody
+    public List<String> save12(){
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        System.out.println(list.get(2));
+        return list;
+    }
+
+    @RequestMapping("/quick11")
+    @ResponseBody
+    public List<String> save11(){
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        System.out.println(list.get(2));
+        return list;
+    }
+
+    @RequestMapping("/quick10")
+    @ResponseBody
+    public User save10(){
+        User user = new User();
+        user.setName("wangwu");
+        user.setAge(18);
+        return user;
+    }
+
+    @RequestMapping("/quick9")
+    @ResponseBody
+    public String save9() throws IOException {
+        User user = new User();
+        user.setName("lisi");
+        user.setAge(18);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(user);
+        return json;
+    }
+
+    @RequestMapping("/quick8")
+    @ResponseBody
+    public String save8(){
+        return "{\"username\":\"zzz\",\"age\":18}";
+    }
+
+    @RequestMapping("/quick7")
+    @ResponseBody
+    public String save7(){
+        return "hao!";
+    }
+
+    @RequestMapping("/quick6")
+        public void save6(HttpServletResponse response) throws IOException {
+            response.getWriter().println("ni");
+        }
+
+
     @RequestMapping("/quick5")
     public String save5(HttpServletRequest request){
         request.setAttribute("username","jie");
         return "success";
     }
+
     @RequestMapping("/quick4")
     public String save4(Model model){
         model.addAttribute("username","jun");

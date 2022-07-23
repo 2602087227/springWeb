@@ -1,21 +1,21 @@
 package com.cjj.controller;
 
 import com.cjj.domain.User;
+import com.cjj.domain.Vo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,6 +28,51 @@ public class UserController {
     public String save(){
         System.out.println("Controller save running!");
         return "success";
+    }
+    @RequestMapping("/quick23")
+    @ResponseBody
+    public void save23(@CookieValue(value = "JSESSIONID")String jse){
+        System.out.println(jse);
+    }
+    @RequestMapping("/quick22")
+    @ResponseBody
+    public void save22(@RequestHeader(value = "Cookie")String userAgent){
+        System.out.println(userAgent);
+    }
+
+    @RequestMapping("/quick21")
+    @ResponseBody
+    public void save21(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+        System.out.println(request);
+        System.out.println(response);
+        System.out.println(session);
+    }
+    @RequestMapping("/quick20")
+    @ResponseBody
+    public void save20(Date date) throws IOException{
+        System.out.println(date);
+    }
+
+    @RequestMapping("/quick19/{username}")
+    @ResponseBody
+    public void save19(@PathVariable(value = "username",required = true)String name){
+        System.out.println(name);
+    }
+    @RequestMapping("/quick18")
+    @ResponseBody
+    public void save18(@RequestParam(value = "username",required = false,defaultValue = "chenjunjie")String name){
+        System.out.println(name);
+    }
+
+    @RequestMapping("/quick17")
+    @ResponseBody
+    public void save17(@RequestBody List<User> userList){
+        System.out.println(userList);
+    }
+    @RequestMapping("/quick16")
+    @ResponseBody
+    public void save16(Vo vo){
+        System.out.println(vo);
     }
 
     @RequestMapping("/quick12")
